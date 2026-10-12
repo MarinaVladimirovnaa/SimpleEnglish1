@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple English · A2 — Present Simple, to be, to have</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#faf9ea;
+  --ink:#11193b;
+  --pink:#feadd2;
+  --yellow:#ffdf2b;
+  --light-yellow:#faebc5;
+  --lavender:#edbbf9;
+  --green:#c6f15c;
+  --coral:#f25e6b;
+  --shadow:6px 8px 0 0 var(--ink);
+  --shadow-sm:4px 5px 0 0 var(--ink);
+  --radius:22px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Manrope',system-ui,sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,.display{font-family:'Bricolage Grotesque','Manrope',sans-serif}
+button{font-family:inherit;cursor:pointer;color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:8px}
+::selection{background:var(--yellow)}
+
+/* ---------- header ---------- */
+header{
+  position:sticky;top:0;z-index:50;
+  background:var(--paper);
+  border-bottom:3px solid var(--ink);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px clamp(16px,4vw,48px);
+}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Bricolage Grotesque';font-weight:800;font-size:1.15rem;letter-spacing:-.01em}
+.logo .dot{width:16px;height:16px;border-radius:50%;background:var(--yellow);border:3px solid var(--ink);box-shadow:2px 2px 0 var(--ink)}
+.logo em{font-style:normal;background:var(--pink);border:2.5px solid var(--ink);border-radius:8px;padding:0 8px;margin-left:2px;box-shadow:2px 2px 0 var(--ink);font-size:.85rem}
+.progress-dots{display:flex;align-items:center;gap:14px}
+.pdot{display:flex;align-items:center;gap:7px;font-size:.8rem;font-weight:700;opacity:.55;transition:opacity .3s}
+.pdot.done{opacity:1}
+.pdot .ring{width:26px;height:26px;border-radius:50%;border:3px solid var(--ink);display:grid;place-items:center;background:#fff;font-size:.72rem;font-weight:800;transition:background .3s,transform .3s}
+.pdot.done .ring{background:var(--green);animation:pop .5s cubic-bezier(.34,1.56,.64,1)}
+@media(max-width:640px){.pdot span.lbl{display:none}}
+
+/* ---------- hero ---------- */
+.hero{
+  background:var(--yellow);
+  border-bottom:3px solid var(--ink);
+  padding:clamp(56px,9vw,110px) clamp(16px,5vw,48px) clamp(80px,10vw,130px);
+  position:relative;
+  text-align:center;
+}
+.hero .kicker{
+  display:inline-block;background:var(--paper);border:3px solid var(--ink);
+  border-radius:999px;padding:7px 20px;font-weight:800;font-size:.85rem;
+  box-shadow:var(--shadow-sm);letter-spacing:.06em;text-transform:uppercase;
+  transform:rotate(-2deg);
+}
+.hero h1{
+  font-size:clamp(2.6rem,7.5vw,5.2rem);
+  line-height:1.02;letter-spacing:-.03em;font-weight:800;
+  margin:26px auto 18px;max-width:900px;
+}
+.hero h1 .u{position:relative;white-space:nowrap}
+.hero h1 .u::after{
+  content:"";position:absolute;left:-2%;right:-2%;bottom:.08em;height:.32em;
+  background:var(--pink);z-index:-1;border-radius:6px;transform:rotate(-1.2deg);
+}
+.hero p{max-width:560px;margin:0 auto 34px;font-size:clamp(1rem,2vw,1.2rem);font-weight:600;line-height:1.55}
+.hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn{
+  border:3px solid var(--ink);border-radius:999px;
+  padding:15px 32px;font-weight:800;font-size:1.02rem;
+  background:var(--ink);color:var(--paper);
+  box-shadow:var(--shadow);
+  transition:transform .15s ease,box-shadow .15s ease;
+  display:inline-flex;align-items:center;gap:10px;
+}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:8px 10px 0 0 var(--ink)}
+.btn:active{transform:translate(4px,6px);box-shadow:0 0 0 0 var(--ink)}
+.btn.ghost{background:var(--paper);color:var(--ink)}
+.btn.small{padding:10px 22px;font-size:.92rem;box-shadow:var(--shadow-sm)}
+.btn.small:hover{box-shadow:6px 7px 0 0 var(--ink)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+/* scalloped divider */
+.scallop{display:block;width:100%;height:26px;margin-top:-25px;position:relative;z-index:2}
+
+/* marquee */
+.marquee{
+  border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);
+  background:var(--pink);overflow:hidden;white-space:nowrap;padding:12px 0;
+}
+.marquee-track{display:inline-flex;gap:0;animation:marquee 22s linear infinite;will-change:transform}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee span{
+  font-family:'Bricolage Grotesque';font-weight:800;font-size:1.05rem;
+  letter-spacing:.02em;padding:0 22px;display:inline-flex;align-items:center;gap:22px;
+}
+.marquee .star{width:14px;height:14px;flex:none}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- layout ---------- */
+.wrap{max-width:980px;margin:0 auto;padding:0 clamp(16px,4vw,32px)}
+section.block{padding:clamp(48px,7vw,90px) 0}
+.sec-head{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:14px}
+.sec-head h2{font-size:clamp(1.9rem,4.5vw,3rem);letter-spacing:-.02em;font-weight:800}
+.sec-head .num{
+  font-family:'Bricolage Grotesque';font-weight:800;font-size:1rem;
+  background:var(--ink);color:var(--paper);border-radius:10px;padding:4px 12px;
+  transform:rotate(-3deg);box-shadow:3px 3px 0 rgba(17,25,59,.25);
+}
+.sec-sub{font-size:1.05rem;font-weight:600;line-height:1.55;max-width:640px;margin-bottom:34px}
+
+/* topic cards */
+.topics{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px}
+.tcard{
+  border:3px solid var(--ink);border-radius:var(--radius);
+  padding:28px 26px 26px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:12px;min-height:250px;
+  transition:transform .2s ease,box-shadow .2s ease;position:relative;
+}
+.tcard:hover{transform:translate(-3px,-3px) rotate(0deg)!important;box-shadow:9px 11px 0 0 var(--ink)}
+.tcard .badge{
+  align-self:flex-start;border:2.5px solid var(--ink);border-radius:999px;
+  padding:4px 14px;font-weight:800;font-size:.78rem;background:var(--paper);
+  letter-spacing:.05em;text-transform:uppercase;
+}
+.tcard h3{font-size:1.55rem;letter-spacing:-.01em;font-weight:800}
+.tcard .forms{font-family:'Bricolage Grotesque';font-weight:700;font-size:1rem;opacity:.75}
+.tcard p{font-size:.92rem;font-weight:600;line-height:1.5;flex:1}
+.tcard .score{
+  font-size:.82rem;font-weight:800;display:inline-flex;align-items:center;gap:6px;
+}
+.tcard .score .pip{width:12px;height:12px;border-radius:50%;border:2px solid var(--ink);background:#fff}
+.tcard .score.passed .pip{background:var(--green)}
+.tcard .btn{align-self:stretch;justify-content:center;margin-top:6px}
+.c-pink{background:var(--pink)} .c-yellow{background:var(--yellow)}
+.c-lav{background:var(--lavender)} .c-cream{background:var(--light-yellow)}
+
+/* ---------- exercise view ---------- */
+#view-ex{display:none}
+.stage{max-width:760px;margin:0 auto}
+.crumb{
+  display:inline-flex;align-items:center;gap:8px;background:none;border:none;
+  font-weight:800;font-size:.95rem;padding:8px 0;margin-bottom:18px;
+}
+.crumb:hover{text-decoration:underline}
+.ex-head{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:20px;flex-wrap:wrap}
+.ex-head h2{font-size:clamp(1.6rem,4vw,2.3rem);letter-spacing:-.02em;font-weight:800}
+.counter{
+  font-family:'Bricolage Grotesque';font-weight:800;font-size:1rem;
+  border:3px solid var(--ink);border-radius:12px;padding:7px 16px;background:#fff;
+  box-shadow:var(--shadow-sm);white-space:nowrap;
+}
+.bar{height:18px;border:3px solid var(--ink);border-radius:999px;background:#fff;overflow:hidden;margin-bottom:30px}
+.bar i{display:block;height:100%;width:0;background:repeating-linear-gradient(-45deg,var(--green) 0 12px,#aee04a 12px 24px);border-right:3px solid var(--ink);transition:width .5s cubic-bezier(.34,1.56,.64,1)}
+
+/* theory card */
+.theory{
+  border:3px solid var(--ink);border-radius:var(--radius);background:#fff;
+  box-shadow:var(--shadow);padding:clamp(24px,4vw,40px);margin-bottom:26px;
+}
+.theory h3{font-size:1.5rem;margin-bottom:6px;font-weight:800}
+.theory .tip{
+  display:inline-block;background:var(--light-yellow);border:2.5px solid var(--ink);
+  border-radius:12px;padding:10px 16px;font-weight:700;font-size:.95rem;margin:14px 0 4px;
+  box-shadow:3px 3px 0 var(--ink);
+}
+table.forms{width:100%;border-collapse:separate;border-spacing:0;margin:18px 0;border:3px solid var(--ink);border-radius:16px;overflow:hidden;font-size:.98rem}
+table.forms th{background:var(--ink);color:var(--paper);font-family:'Bricolage Grotesque';padding:11px 14px;text-align:left;font-size:.9rem;letter-spacing:.03em}
+table.forms td{padding:11px 14px;border-top:2.5px solid var(--ink);font-weight:600}
+table.forms tr td:first-child{font-weight:800}
+table.forms tr:nth-child(even) td{background:var(--paper)}
+table.forms td .f{font-family:'Bricolage Grotesque';font-weight:800;color:var(--coral)}
+ul.ex-list{list-style:none;margin:16px 0 0;display:grid;gap:10px}
+ul.ex-list li{
+  border:2.5px solid var(--ink);border-radius:12px;padding:10px 16px;background:var(--paper);
+  font-weight:600;font-size:.96rem;display:flex;gap:10px;align-items:baseline;
+}
+ul.ex-list li b{font-family:'Bricolage Grotesque';white-space:nowrap}
+ul.ex-list li .ru{margin-left:auto;font-size:.82rem;opacity:.6;font-weight:700;text-align:right}
+@media(max-width:520px){ul.ex-list li{flex-wrap:wrap}.ul .ru{margin-left:0}}
+
+/* question card */
+.qcard{
+  border:3px solid var(--ink);border-radius:var(--radius);background:#fff;
+  box-shadow:var(--shadow);padding:clamp(26px,5vw,44px);
+}
+.q-type{
+  display:inline-block;border:2.5px solid var(--ink);border-radius:999px;padding:4px 16px;
+  font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--light-yellow);margin-bottom:20px;
+}
+.q-text{font-family:'Bricolage Grotesque';font-size:clamp(1.35rem,3.4vw,1.9rem);font-weight:700;line-height:1.35;letter-spacing:-.01em;margin-bottom:8px}
+.q-text .gap{
+  display:inline-block;min-width:88px;border-bottom:4px dashed var(--ink);
+  text-align:center;color:var(--coral);padding:0 6px;
+}
+.q-ru{font-size:.92rem;font-weight:700;opacity:.55;margin-bottom:26px}
+.opts{display:grid;gap:14px}
+.opt{
+  border:3px solid var(--ink);border-radius:16px;background:var(--paper);
+  padding:15px 20px;font-family:'Bricolage Grotesque';font-weight:700;font-size:1.15rem;
+  text-align:left;box-shadow:var(--shadow-sm);
+  transition:transform .12s ease,box-shadow .12s ease,background .2s;
+  display:flex;align-items:center;gap:14px;
+}
+.opt .key{
+  width:30px;height:30px;flex:none;border:2.5px solid var(--ink);border-radius:50%;
+  display:grid;place-items:center;font-size:.85rem;background:#fff;font-weight:800;
+}
+.opt:hover:not(:disabled){transform:translate(-2px,-2px);box-shadow:6px 7px 0 0 var(--ink);background:var(--light-yellow)}
+.opt:disabled{cursor:default}
+.opt.correct{background:var(--green);animation:pop .45s cubic-bezier(.34,1.56,.64,1)}
+.opt.wrong{background:var(--coral);color:#fff;animation:shake .4s ease}
+.opt.wrong .key{background:#fff;color:var(--ink)}
+.opt.dim{opacity:.45}
+.fill-row{display:flex;gap:14px;flex-wrap:wrap}
+.fill-row input{
+  flex:1;min-width:200px;border:3px solid var(--ink);border-radius:16px;
+  padding:14px 20px;font-family:'Bricolage Grotesque';font-weight:700;font-size:1.2rem;
+  background:var(--paper);color:var(--ink);box-shadow:var(--shadow-sm);
+}
+.fill-row input:focus{outline:none;background:#fff}
+.fill-row input.correct{background:var(--green);animation:pop .45s cubic-bezier(.34,1.56,.64,1)}
+.fill-row input.wrong{background:var(--coral);color:#fff;animation:shake .4s ease}
+.feedback{
+  margin-top:24px;border:3px solid var(--ink);border-radius:16px;padding:16px 20px;
+  font-weight:600;line-height:1.5;display:none;animation:pop .4s cubic-bezier(.34,1.56,.64,1);
+}
+.feedback.show{display:block}
+.feedback.ok{background:var(--green)}
+.feedback.no{background:var(--pink)}
+.feedback b{font-family:'Bricolage Grotesque';display:block;margin-bottom:4px;font-size:1.05rem}
+.q-actions{display:flex;justify-content:flex-end;margin-top:24px;gap:14px}
+
+/* results */
+.results{text-align:center;padding:clamp(30px,6vw,60px) clamp(20px,4vw,40px)}
+.results h3{font-size:clamp(2rem,5vw,3rem);letter-spacing:-.02em;margin:14px 0 8px;font-weight:800}
+.results .big{
+  font-family:'Bricolage Grotesque';font-weight:800;font-size:clamp(3.2rem,9vw,5rem);
+  letter-spacing:-.03em;line-height:1;
+}
+.results .big small{font-size:.35em;opacity:.5;font-weight:700}
+.results p{font-weight:600;max-width:420px;margin:10px auto 26px;line-height:1.55}
+.stars{display:flex;justify-content:center;gap:10px;margin-bottom:8px}
+.stars svg{width:44px;height:44px}
+.stars .on path{fill:var(--yellow)}
+.stars .off path{fill:#fff}
+.results .row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+/* footer */
+footer{
+  border-top:3px solid var(--ink);background:var(--ink);color:var(--paper);
+  padding:44px clamp(16px,4vw,48px);text-align:center;
+}
+footer .f-title{font-family:'Bricolage Grotesque';font-weight:800;font-size:1.4rem;margin-bottom:8px}
+footer p{font-size:.9rem;opacity:.7;font-weight:600}
+
+/* animations */
+@keyframes pop{0%{transform:scale(.85)}60%{transform:scale(1.06)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:100}
+</style>
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+
+<header>
+  <div class="logo"><span class="dot"></span>Simple English<em>A2</em></div>
+  <div class="progress-dots" id="dots">
+    <div class="pdot" data-sec="tobe"><span class="ring">1</span><span class="lbl">to be</span></div>
+    <div class="pdot" data-sec="have"><span class="ring">2</span><span class="lbl">to have</span></div>
+    <div class="pdot" data-sec="present"><span class="ring">3</span><span class="lbl">Present Simple</span></div>
+    <div class="pdot" data-sec="final"><span class="ring">★</span><span class="lbl">Тест</span></div>
+  </div>
+</header>
+
+<div id="view-home">
+  <section class="hero">
+    <span class="kicker">Тренажёр грамматики · уровень A2</span>
+    <h1>Present Simple, <span class="u">to&nbsp;be</span> и <span class="u">to&nbsp;have</span> — без зубрёжки</h1>
+    <p>Короткие правила-шпаргалки и живые упражнения с мгновенной проверкой. Выбирай тему, отвечай, получай звёзды — и доведи все четыре кружка вверху до зелёного.</p>
+    <div class="hero-cta">
+      <button class="btn" onclick="openSection('tobe')">Начать с to be →</button>
+      <button class="btn ghost" onclick="openSection('final')">Сразу к тесту</button>
+    </div>
+  </section>
+  <svg class="scallop" viewBox="0 0 1200 26" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,0 Q30,26 60,0 T120,0 T180,0 T240,0 T300,0 T360,0 T420,0 T480,0 T540,0 T600,0 T660,0 T720,0 T780,0 T840,0 T900,0 T960,0 T1020,0 T1080,0 T1140,0 T1200,0 L1200,0 L0,0 Z" fill="#ffdf2b" stroke="#11193b" stroke-width="3"/>
+  </svg>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marquee-track"></div>
+  </div>
+
+  <div class="wrap">
+    <section class="block">
+      <div class="sec-head reveal"><span class="num">01</span><h2>Выбери тему</h2></div>
+      <p class="sec-sub reveal">Каждая тема — это шпаргалка и набор заданий: выбор ответа и вставка пропущенного слова. В конце — финальный тест из всех трёх тем.</p>
+      <div class="topics" id="topics"></div>
+    </section>
+
+    <section class="block" style="padding-top:0">
+      <div class="sec-head reveal"><span class="num">02</span><h2>Как это работает</h2></div>
+      <div class="topics" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+        <div class="tcard c-cream reveal" style="transform:rotate(-1.2deg);min-height:0">
+          <h3>1 · Прочти правило</h3>
+          <p>Перед заданиями — короткая шпаргалка с таблицей форм и примерами. Её всегда можно открыть заново.</p>
+        </div>
+        <div class="tcard c-cream reveal" style="transform:rotate(1.4deg);min-height:0">
+          <h3>2 · Решай и проверяй</h3>
+          <p>Ответил — сразу узнал результат и получил объяснение, почему именно так. Ошибаться не страшно.</p>
+        </div>
+        <div class="tcard c-cream reveal" style="transform:rotate(-1deg);min-height:0">
+          <h3>3 · Собери звёзды</h3>
+          <p>За 90%+ правильных ответов — три звезды. Лучший результат сохраняется в твоём браузере.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="f-title">Simple English · A2</div>
+    <p>Present Simple · глагол to be · глагол to have — тренажёр для ежедневной практики.</p>
+  </footer>
+</div>
+
+<div id="view-ex">
+  <div class="wrap">
+    <section class="block" style="padding-bottom:60px">
+      <button class="crumb" onclick="goHome()">← Все темы</button>
+      <div class="stage" id="stage"></div>
+    </section>
+  </div>
+</div>
+
+<script>
+/* ================= DATA ================= */
+const SECTIONS = {
+  tobe:{
+    title:"Глагол to be",
+    forms:"am · is · are",
+    color:"c-pink", rotate:"-1.8deg",
+    desc:"Кто ты, где ты и какой ты: I am, she is, they are. Самый нужный глагол английского.",
+    theory:`
+      <h3>Глагол to be — «быть, являться, находиться»</h3>
+      <div class="tip">Запомни три формы: <b>am</b> — только с I · <b>is</b> — he/she/it · <b>are</b> — you/we/they</div>
+      <table class="forms">
+        <tr><th>Местоимение</th><th>Форма</th><th>Отрицание</th><th>Вопрос</th></tr>
+        <tr><td>I</td><td class="f">am</td><td>am not</td><td>Am I …?</td></tr>
+        <tr><td>he / she / it</td><td class="f">is</td><td>is not = isn’t</td><td>Is she …?</td></tr>
+        <tr><td>you / we / they</td><td class="f">are</td><td>are not = aren’t</td><td>Are they …?</td></tr>
+      </table>
+      <ul class="ex-list">
+        <li><b>I am happy.</b><span class="ru">Я счастлив.</span></li>
+        <li><b>She is a doctor.</b><span class="ru">Она врач.</span></li>
+        <li><b>They are at school.</b><span class="ru">Они в школе.</span></li>
+        <li><b>It is not cold.</b><span class="ru">Не холодно.</span></li>
+      </ul>`,
+    questions:[
+      {t:"c",q:"I ___ a student.",ru:"Я студент.",opts:["am","is","are"],a:"am",ex:"С местоимением I всегда идёт форма am: I am a student."},
+      {t:"c",q:"She ___ my sister.",ru:"Она моя сестра.",opts:["are","is","am"],a:"is",ex:"He, she, it → is. She is my sister."},
+      {t:"c",q:"They ___ happy today.",ru:"Они сегодня счастливы.",opts:["is","am","are"],a:"are",ex:"They — множественное число, поэтому are."},
+      {t:"c",q:"___ you from Russia?",ru:"Ты из России?",opts:["Is","Are","Am"],a:"Are",ex:"В вопросе с you ставим Are: Are you from Russia?"},
+      {t:"c",q:"The cat ___ on the sofa.",ru:"Кот на диване.",opts:["is","are","am"],a:"is",ex:"The cat = it, а с it идёт is."},
+      {t:"c",q:"We ___ at home now.",ru:"Мы сейчас дома.",opts:["am","is","are"],a:"are",ex:"We → are. We are at home."},
+      {t:"c",q:"He ___ not tired.",ru:"Он не устал.",opts:["are","am","is"],a:"is",ex:"He → is. Отрицание: He is not (isn’t) tired."},
+      {t:"f",q:"My name ___ Anna.",ru:"Меня зовут Анна.",a:["is","'s"],ex:"My name = it → is."},
+      {t:"f",q:"We ___ good friends.",ru:"Мы хорошие друзья.",a:["are","'re"],ex:"We → are."},
+      {t:"f",q:"I ___ 12 years old.",ru:"Мне 12 лет.",a:["am","'m"],ex:"Возраст говорим через to be: I am 12 years old."},
+      {t:"f",q:"The books ___ on the table.",ru:"Книги на столе.",a:["are"],ex:"The books = they → are."},
+      {t:"f",q:"___ it cold today?",ru:"Холодно сегодня?",a:["is"],ex:"Вопрос с it начинается с Is: Is it cold today?"}
+    ]
+  },
+  have:{
+    title:"Глагол to have",
+    forms:"have · has",
+    color:"c-yellow", rotate:"1.6deg",
+    desc:"Иметь, обладать: I have a bike, she has a cat. Плюс have breakfast и have got.",
+    theory:`
+      <h3>Глагол to have — «иметь»</h3>
+      <div class="tip">Всего две формы: <b>has</b> — только с he/she/it, со всеми остальными — <b>have</b>.</div>
+      <table class="forms">
+        <tr><th>Местоимение</th><th>Форма</th><th>Отрицание</th><th>Вопрос</th></tr>
+        <tr><td>I / you / we / they</td><td class="f">have</td><td>don’t have</td><td>Do you have …?</td></tr>
+        <tr><td>he / she / it</td><td class="f">has</td><td>doesn’t have</td><td>Does he have …?</td></tr>
+      </table>
+      <ul class="ex-list">
+        <li><b>I have a dog.</b><span class="ru">У меня есть собака.</span></li>
+        <li><b>She has two brothers.</b><span class="ru">У неё два брата.</span></li>
+        <li><b>We have breakfast at 8.</b><span class="ru">Мы завтракаем в 8.</span></li>
+        <li><b>He doesn’t have a car.</b><span class="ru">У него нет машины.</span></li>
+      </ul>`,
+    questions:[
+      {t:"c",q:"I ___ a dog.",ru:"У меня есть собака.",opts:["has","have","haves"],a:"have",ex:"I → have. Форма has бывает только с he/she/it."},
+      {t:"c",q:"She ___ two brothers.",ru:"У неё два брата.",opts:["have","has","haves"],a:"has",ex:"She → has. She has two brothers."},
+      {t:"c",q:"They ___ a big house.",ru:"У них большой дом.",opts:["has","have","haves"],a:"have",ex:"They → have."},
+      {t:"c",q:"He ___ a new bike.",ru:"У него новый велосипед.",opts:["have","has","haves"],a:"has",ex:"He → has."},
+      {t:"c",q:"We ___ breakfast at 8 o’clock.",ru:"Мы завтракаем в 8 часов.",opts:["has","have","haves"],a:"have",ex:"Have breakfast — устойчивое выражение «завтракать». We → have."},
+      {t:"c",q:"My friend ___ a computer.",ru:"У моего друга есть компьютер.",opts:["have","has","haves"],a:"has",ex:"My friend = he → has."},
+      {t:"c",q:"The baby ___ blue eyes.",ru:"У малыша голубые глаза.",opts:["have","has","haves"],a:"has",ex:"The baby = it → has."},
+      {t:"c",q:"She doesn’t ___ a car.",ru:"У неё нет машины.",opts:["has","have","haves"],a:"have",ex:"После doesn’t всегда начальная форма: doesn’t have (s уже «ушла» в does)."},
+      {t:"f",q:"It ___ four legs.",ru:"У него (у животного) четыре ноги.",a:["has","'s got"],ex:"It → has."},
+      {t:"f",q:"I ___ a question.",ru:"У меня есть вопрос.",a:["have"],ex:"I → have."},
+      {t:"f",q:"She ___ long hair.",ru:"У неё длинные волосы.",a:["has","'s got"],ex:"She → has."},
+      {t:"f",q:"They ___ many toys.",ru:"У них много игрушек.",a:["have"],ex:"They → have."}
+    ]
+  },
+  present:{
+    title:"Present Simple",
+    forms:"play · plays · do/does",
+    color:"c-lav", rotate:"-1.4deg",
+    desc:"Привычки, распорядок и факты: I play, she plays, do you? Когда что-то происходит обычно и всегда.",
+    theory:`
+      <h3>Present Simple — «обычно, всегда, каждый день»</h3>
+      <div class="tip">С he/she/it глагол получает окончание <b>-s / -es</b>: play → play<b>s</b>, watch → watch<b>es</b>, study → stud<b>ies</b>, go → go<b>es</b>.</div>
+      <table class="forms">
+        <tr><th>Тип</th><th>I / you / we / they</th><th>he / she / it</th></tr>
+        <tr><td>Утверждение</td><td class="f">I play tennis.</td><td class="f">She plays tennis.</td></tr>
+        <tr><td>Отрицание</td><td>I don’t play.</td><td>She doesn’t play.</td></tr>
+        <tr><td>Вопрос</td><td>Do you play?</td><td>Does she play?</td></tr>
+      </table>
+      <ul class="ex-list">
+        <li><b>She goes to school every day.</b><span class="ru">Она ходит в школу каждый день.</span></li>
+        <li><b>They watch TV in the evening.</b><span class="ru">Они смотрят телевизор вечером.</span></li>
+        <li><b>He doesn’t like coffee.</b><span class="ru">Он не любит кофе.</span></li>
+        <li><b>Do you speak English?</b><span class="ru">Ты говоришь по-английски?</span></li>
+      </ul>`,
+    questions:[
+      {t:"c",q:"She ___ to school every day.",ru:"Она ходит в школу каждый день.",opts:["go","goes","gos"],a:"goes",ex:"She → глагол с -s. Go — особенный: go → goes."},
+      {t:"c",q:"They ___ TV in the evening.",ru:"Они смотрят телевизор вечером.",opts:["watches","watch","watchs"],a:"watch",ex:"They → глагол без окончания: watch."},
+      {t:"c",q:"He ___ coffee for breakfast.",ru:"Он пьёт кофе на завтрак.",opts:["drink","drinks","drinkes"],a:"drinks",ex:"He → drinks (просто добавляем -s)."},
+      {t:"c",q:"My dad ___ in an office.",ru:"Мой папа работает в офисе.",opts:["work","works","workes"],a:"works",ex:"My dad = he → works."},
+      {t:"c",q:"It ___ a lot in autumn.",ru:"Осенью часто идёт дождь.",opts:["rain","rains","raines"],a:"rains",ex:"It → rains."},
+      {t:"c",q:"She ___ like tea.",ru:"Она не любит чай.",opts:["don’t","doesn’t","isn’t"],a:"doesn’t",ex:"Отрицание с she → doesn’t + начальная форма глагола."},
+      {t:"c",q:"___ you play chess?",ru:"Ты играешь в шахматы?",opts:["Does","Do","Are"],a:"Do",ex:"Вопрос с you начинается с Do."},
+      {t:"c",q:"___ your brother speak English?",ru:"Твой брат говорит по-английски?",opts:["Do","Is","Does"],a:"Does",ex:"Your brother = he → Does he speak…?"},
+      {t:"f",q:"She ___ (read) books every evening.",ru:"Она читает книги каждый вечер.",a:["reads"],ex:"She → read + s = reads."},
+      {t:"f",q:"He ___ (watch) films at the weekend.",ru:"Он смотрит фильмы на выходных.",a:["watches"],ex:"Глаголы на -ch получают -es: watch → watches."},
+      {t:"f",q:"We ___ (live) in Moscow.",ru:"Мы живём в Москве.",a:["live"],ex:"We → глагол без окончания: live."},
+      {t:"f",q:"My mum ___ (cook) very well.",ru:"Моя мама очень хорошо готовит.",a:["cooks"],ex:"My mum = she → cook + s = cooks."}
+    ]
+  },
+  final:{
+    title:"Финальный тест",
+    forms:"все три темы",
+    color:"c-cream", rotate:"1.2deg",
+    desc:"12 вопросов вперемешку: to be, to have и Present Simple. Проверь, что всё усвоилось!",
+    theory:`
+      <h3>Финальный тест · 12 вопросов</h3>
+      <div class="tip">Три шага к правильному ответу: 1) найди подлежащее, 2) реши — это <b>he/she/it</b> или нет, 3) выбери форму.</div>
+      <table class="forms">
+        <tr><th>Тема</th><th>he / she / it</th><th>остальные</th></tr>
+        <tr><td>to be</td><td class="f">is</td><td class="f">am (I) / are</td></tr>
+        <tr><td>to have</td><td class="f">has</td><td class="f">have</td></tr>
+        <tr><td>Present Simple</td><td class="f">V + s/es, does</td><td class="f">V, do</td></tr>
+      </table>
+      <ul class="ex-list">
+        <li><b>She is · she has · she plays</b><span class="ru">he/she/it — всегда «особенные»</span></li>
+        <li><b>Does he have…? · He doesn’t play…</b><span class="ru">после does/doesn’t — начальная форма</span></li>
+      </ul>`,
+    questions:[
+      {t:"c",q:"My sister ___ a teacher.",ru:"Моя сестра — учительница.",opts:["are","is","am"],a:"is",ex:"My sister = she → is."},
+      {t:"c",q:"I ___ two cats.",ru:"У меня две кошки.",opts:["has","have","haves"],a:"have",ex:"I → have."},
+      {t:"c",q:"He ___ football on Saturdays.",ru:"Он играет в футбол по субботам.",opts:["play","plays","plaies"],a:"plays",ex:"He → play + s = plays."},
+      {t:"c",q:"___ they at the park now?",ru:"Они сейчас в парке?",opts:["Do","Is","Are"],a:"Are",ex:"Здесь нужен to be: Are they…? (do ставим только перед обычным глаголом)."},
+      {t:"c",q:"She ___ her homework every day.",ru:"Она делает домашнее задание каждый день.",opts:["do","does","doing"],a:"does",ex:"Do в 3-м лице ед. ч. → does."},
+      {t:"c",q:"We ___ hungry.",ru:"Мы голодные.",opts:["is","am","are"],a:"are",ex:"We → are."},
+      {t:"c",q:"The dog ___ a long tail.",ru:"У собаки длинный хвост.",opts:["have","has","haves"],a:"has",ex:"The dog = it → has."},
+      {t:"c",q:"___ your mum work in a hospital?",ru:"Твоя мама работает в больнице?",opts:["Do","Does","Is"],a:"Does",ex:"Your mum = she → Does + начальная форма (work, а не works!)."},
+      {t:"f",q:"There ___ a shop near my house.",ru:"Рядом с моим домом есть магазин.",a:["is","'s"],ex:"There is — «есть, находится» для единственного числа."},
+      {t:"f",q:"I ___ (not / like) spiders.",ru:"Я не люблю пауков.",a:["don't like","do not like","dont like"],ex:"Отрицание с I: don’t + глагол."},
+      {t:"f",q:"She ___ (study) English on Mondays.",ru:"Она занимается английским по понедельникам.",a:["studies","studys"],ex:"Study → studies: -y после согласной меняется на -ies."},
+      {t:"f",q:"You ___ my best friend.",ru:"Ты мой лучший друг.",a:["are","'re"],ex:"You → are."}
+    ]
+  }
+};
+const ORDER = ["tobe","have","present","final"];
+
+/* ================= STATE ================= */
+let store = {};
+try{ store = JSON.parse(localStorage.getItem("a2trainer")||"{}"); }catch(e){ store = {}; }
+function save(){ try{ localStorage.setItem("a2trainer", JSON.stringify(store)); }catch(e){} }
+
+/* ================= HOME ================= */
+function renderTopics(){
+  const box = document.getElementById("topics");
+  box.innerHTML = ORDER.map((id,i)=>{
+    const s = SECTIONS[id];
+    const best = store[id];
+    const badge = id==="final" ? "Финал" : "Тема "+(i+1);
+    const score = best
+      ? `<span class="score passed"><span class="pip"></span>Лучший результат: ${best.s}/${best.t}</span>`
+      : `<span class="score"><span class="pip"></span>Ещё не пройдено</span>`;
+    return `<article class="tcard ${s.color} reveal" style="transform:rotate(${s.rotate})">
+      <span class="badge">${badge} · ${s.questions.length} заданий</span>
+      <h3>${s.title}</h3>
+      <div class="forms">${s.forms}</div>
+      <p>${s.desc}</p>
+      ${score}
+      <button class="btn small" onclick="openSection('${id}')">${best?"Пройти ещё раз":"Начать"} →</button>
+    </article>`;
+  }).join("");
+  ORDER.forEach(id=>{
+    const d = document.querySelector(`.pdot[data-sec="${id}"]`);
+    if(d) d.classList.toggle("done", !!store[id]);
+  });
+  observeReveals();
+}
+
+/* marquee */
+(function(){
+  const words = ["I am","you are","she is","it has","we have","they play","he goes","do you?","she doesn’t","it rains","I don’t","are they?"];
+  const star = `<svg class="star" viewBox="0 0 20 20"><path d="M10 0l2.4 7.6H20l-6.2 4.5L16.2 20 10 15.4 3.8 20l2.4-7.9L0 7.6h7.6z" fill="#11193b"/></svg>`;
+  const half = words.map(w=>`<span>${w}${star}</span>`).join("");
+  document.getElementById("marquee-track").innerHTML = half + half;
+})();
+
+/* reveal on scroll */
+let io;
+function observeReveals(){
+  if(!io){
+    io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} }),{threshold:.12});
+  }
+  document.querySelectorAll(".reveal:not(.in)").forEach(el=>io.observe(el));
+}
+
+/* ================= EXERCISE ENGINE ================= */
+let cur = null; // {sec, idx, correct, mode}
+
+function openSection(id){
+  cur = { sec:id, idx:0, correct:0, mode:"theory" };
+  document.getElementById("view-home").style.display = "none";
+  document.getElementById("view-ex").style.display = "block";
+  window.scrollTo({top:0});
+  renderTheory();
+}
+function goHome(){
+  document.getElementById("view-ex").style.display = "none";
+  document.getElementById("view-home").style.display = "block";
+  renderTopics();
+  window.scrollTo({top:0});
+}
+function stage(){ return document.getElementById("stage"); }
+function headHTML(){
+  const s = SECTIONS[cur.sec];
+  return `<div class="ex-head">
+      <h2>${s.title}</h2>
+      <span class="counter" id="counter"></span>
+    </div>
+    <div class="bar"><i id="barfill"></i></div>`;
+}
+function renderTheory(){
+  const s = SECTIONS[cur.sec];
+  stage().innerHTML = headHTML() + `
+    <div class="theory">
+      ${s.theory}
+      <div style="display:flex;justify-content:flex-end;margin-top:24px">
+        <button class="btn" onclick="startQuiz()">К заданиям →</button>
+      </div>
+    </div>`;
+  const c = document.getElementById("counter");
+  if(c) c.textContent = "Шпаргалка";
+}
+function startQuiz(){
+  cur.mode = "quiz"; cur.idx = 0; cur.correct = 0;
+  renderQuestion();
+}
+function renderQuestion(){
+  const s = SECTIONS[cur.sec];
+  const q = s.questions[cur.idx];
+  const n = s.questions.length;
+  const sentence = q.q.replace("___", `<span class="gap" id="gap-slot">___</span>`);
+  const body = q.t === "c"
+    ? `<div class="opts">${q.opts.map((o,i)=>`<button class="opt" data-v="${o}"><span class="key">${"ABCD"[i]}</span>${o}</button>`).join("")}</div>`
+    : `<div class="fill-row">
+         <input id="fill" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Впиши слово…">
+         <button class="btn small" id="check-btn">Проверить</button>
+       </div>`;
+  stage().innerHTML = headHTML() + `
+    <div class="qcard" id="qcard">
+      <span class="q-type">${q.t==="c"?"Выбери ответ":"Вставь слово"}</span>
+      <div class="q-text">${sentence}</div>
+      <div class="q-ru">${q.ru}</div>
+      ${body}
+      <div class="feedback" id="fb"></div>
+      <div class="q-actions">
+        <button class="btn ghost small" onclick="renderTheory()">Шпаргалка</button>
+        <button class="btn" id="next-btn" style="display:none" onclick="nextQuestion()">${cur.idx===n-1?"Результат →":"Дальше →"}</button>
+      </div>
+    </div>`;
+  document.getElementById("counter").textContent = `Вопрос ${cur.idx+1} из ${n}`;
+  document.getElementById("barfill").style.width = (cur.idx/n*100)+"%";
+  if(q.t==="c"){
+    stage().querySelectorAll(".opt").forEach(b=>b.addEventListener("click",()=>checkChoice(b,q)));
+  }else{
+    const inp = document.getElementById("fill");
+    inp.focus();
+    document.getElementById("check-btn").addEventListener("click",()=>checkFill(q));
+    inp.addEventListener("keydown",e=>{ if(e.key==="Enter") checkFill(q); });
+  }
+}
+function norm(v){ return v.trim().toLowerCase().replace(/\s+/g," ").replace(/[’‘`]/g,"'"); }
+function showFeedback(ok,q,given){
+  const fb = document.getElementById("fb");
+  fb.className = "feedback show " + (ok?"ok":"no");
+  fb.innerHTML = ok
+    ? `<b>Верно!</b>${q.ex}`
+    : `<b>Не совсем. Правильно: «${Array.isArray(q.a)?q.a[0]:q.a}»</b>${q.ex}`;
+  document.getElementById("next-btn").style.display = "inline-flex";
+  document.getElementById("barfill").style.width = ((cur.idx+1)/SECTIONS[cur.sec].questions.length*100)+"%";
+  const slot = document.getElementById("gap-slot");
+  if(slot) slot.textContent = Array.isArray(q.a)?q.a[0]:q.a;
+  if(ok) burst();
+}
+function checkChoice(btn,q){
+  const ok = norm(btn.dataset.v) === norm(q.a);
+  stage().querySelectorAll(".opt").forEach(b=>{
+    b.disabled = true;
+    if(norm(b.dataset.v)===norm(q.a)) b.classList.add("correct");
+    else if(b===btn) b.classList.add("wrong");
+    else b.classList.add("dim");
+  });
+  if(ok) cur.correct++;
+  showFeedback(ok,q);
+}
+function checkFill(q){
+  const inp = document.getElementById("fill");
+  const ok = q.a.some(a=>norm(a)===norm(inp.value));
+  inp.disabled = true;
+  document.getElementById("check-btn").disabled = true;
+  inp.classList.add(ok?"correct":"wrong");
+  if(ok) cur.correct++;
+  showFeedback(ok,q);
+}
+function nextQuestion(){
+  cur.idx++;
+  if(cur.idx < SECTIONS[cur.sec].questions.length) renderQuestion();
+  else renderResults();
+}
+function renderResults(){
+  const s = SECTIONS[cur.sec];
+  const n = s.questions.length, c = cur.correct;
+  const pct = c/n*100;
+  if(!store[cur.sec] || c > store[cur.sec].s){ store[cur.sec] = {s:c,t:n}; save(); }
+  const stars = pct>=90?3 : pct>=70?2 : pct>=50?1 : 0;
+  const msg = pct>=90 ? "Отлично! Три темы у тебя в кармане — так держать!"
+    : pct>=70 ? "Хорошая работа! Ещё немного практики — и будет идеально."
+    : pct>=50 ? "Неплохо! Загляни в шпаргалку и попробуй ещё раз."
+    : "Ничего страшного! Перечитай правило — и всё обязательно получится.";
+  const starSVG = on=>`<svg class="${on?'on':'off'}" viewBox="0 0 20 20"><path d="M10 0l2.4 7.6H20l-6.2 4.5L16.2 20 10 15.4 3.8 20l2.4-7.9L0 7.6h7.6z" stroke="#11193b" stroke-width="1.4"/></svg>`;
+  stage().innerHTML = headHTML() + `
+    <div class="qcard results">
+      <div class="stars">${starSVG(stars>0)}${starSVG(stars>1)}${starSVG(stars>2)}</div>
+      <div class="big">${c}<small> / ${n}</small></div>
+      <h3>${msg}</h3>
+      <p>Тема: <b>${s.title}</b>. Результат сохранён — посмотри свой прогресс на главной странице.</p>
+      <div class="row">
+        <button class="btn" onclick="startQuiz()">Ещё раз ↻</button>
+        <button class="btn ghost" onclick="goHome()">Ко всем темам</button>
+      </div>
+    </div>`;
+  document.getElementById("counter").textContent = "Готово";
+  document.getElementById("barfill").style.width = "100%";
+  if(pct>=70){ setTimeout(()=>bigConfetti(),250); }
+  const d = document.querySelector(`.pdot[data-sec="${cur.sec}"]`);
+  if(d) d.classList.add("done");
+}
+
+/* ================= CONFETTI ================= */
+const cv = document.getElementById("confetti"), ctx = cv.getContext("2d");
+let parts = [], raf = null;
+function sizeCanvas(){ cv.width = innerWidth; cv.height = innerHeight; }
+addEventListener("resize", sizeCanvas); sizeCanvas();
+const COLORS = ["#ffdf2b","#feadd2","#edbbf9","#c6f15c","#f25e6b","#11193b"];
+function spawn(x,y,n){
+  for(let i=0;i<n;i++){
+    const a = Math.random()*Math.PI*2, sp = 3+Math.random()*7;
+    parts.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-4,
+      s:5+Math.random()*7,r:Math.random()*Math.PI,vr:(Math.random()-.5)*.3,
+      c:COLORS[Math.floor(Math.random()*COLORS.length)],life:1,decay:.008+Math.random()*.012});
+  }
+  if(!raf) loop();
+}
+function loop(){
+  ctx.clearRect(0,0,cv.width,cv.height);
+  parts = parts.filter(p=>p.life>0);
+  parts.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy; p.vy+=.22; p.vx*=.99; p.r+=p.vr; p.life-=p.decay;
+    ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.r);
+    ctx.globalAlpha = Math.max(0,p.life);
+    ctx.fillStyle = p.c;
+    ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6);
+    ctx.restore();
+  });
+  if(parts.length){ raf = requestAnimationFrame(loop); }
+  else{ raf = null; ctx.clearRect(0,0,cv.width,cv.height); }
+}
+function burst(){
+  const card = document.getElementById("qcard");
+  const r = card ? card.getBoundingClientRect() : {left:innerWidth/2,top:innerHeight/2,width:0};
+  spawn(r.left+r.width/2, r.top+120, 26);
+}
+function bigConfetti(){
+  for(let i=0;i<5;i++) setTimeout(()=>spawn(innerWidth*(0.15+Math.random()*0.7), innerHeight*0.25, 40), i*160);
+}
+
+/* init */
+renderTopics();
+</script>
+</body>
+</html>
